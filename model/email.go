@@ -2,7 +2,7 @@ package model
 
 import ()
 
-type Email struct {
+type User struct {
 	Email string `json:"email"`
 }
 

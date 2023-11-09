@@ -1,0 +1,8 @@
+runtime: go121
+
+handlers:
+- url: /.otpapi
+  script: auto
+env: flex
+manual_scaling:
+  instances: 1
