@@ -1,7 +1,5 @@
 package model
 
-import ()
-
 type User struct {
 	Email string `json:"email"`
 }

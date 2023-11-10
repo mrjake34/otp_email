@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"otp_email/router"
 
@@ -15,6 +16,7 @@ func main() {
 
 	err := http.ListenAndServe(":8080", r)
 	if err != nil {
+		log.Fatal("ListenAndServe: ", err)
 		panic(err)
 	}
 }

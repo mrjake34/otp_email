@@ -1,9 +1,8 @@
 package config
 
 import (
-	"os"
-
 	"github.com/joho/godotenv"
+	"os"
 )
 
 // Config is used to store all configuration data.
