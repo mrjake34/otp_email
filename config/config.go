@@ -1,22 +1,15 @@
 package config
 
 import (
-	"github.com/joho/godotenv"
 	"os"
+	"otpapi/model"
+
+	"github.com/joho/godotenv"
 )
 
-// Config is used to store all configuration data.
-type Config struct {
-	Host     string
-	Port     string
-	From     string
-	Password string
-}
-
-// GetConfig is used to get all configuration data.
-func GetConfig() *Config {
+func GetConfig() *model.Config {
 	// Create config struct
-	config := &Config{}
+	config := &model.Config{}
 
 	err := godotenv.Load("config/config.env")
 	if err != nil {

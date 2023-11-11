@@ -1,8 +1,9 @@
 package router
 
 import (
+	"otpapi/controller"
+
 	"github.com/gorilla/mux"
-	"otp_email/controller"
 )
 
 func SendOtp(r *mux.Router) {

@@ -1,4 +1,4 @@
-module otp_email
+module otpapi
 
 go 1.21.4
 

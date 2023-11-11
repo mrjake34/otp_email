@@ -7,3 +7,10 @@ type User struct {
 type Otp struct {
 	Otp string `json:"otp"`
 }
+
+type Config struct {
+	Host     string
+	Port     string
+	From     string
+	Password string
+}

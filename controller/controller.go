@@ -3,12 +3,12 @@ package controller
 import (
 	"crypto/rand"
 	"encoding/json"
-	"fmt"
+	"log"
 	"math/big"
 	"net/http"
 	"net/smtp"
-	"otp_email/config"
-	"otp_email/model"
+	"otpapi/config"
+	"otpapi/model"
 
 	"github.com/jordan-wright/email"
 )
@@ -16,10 +16,10 @@ import (
 // SendOtpHandler is used to send OTP to user's email address.
 func SendOtpHandlerTr(w http.ResponseWriter, r *http.Request) {
 	user := &model.User{}
-	fmt.Print(r.Body)
+	log.Println("Request Mail", r.Body)
 	err := json.NewDecoder(r.Body).Decode(&user)
 	if err != nil {
-		fmt.Println("Decoder hatası:", err)
+		log.Println("Decoder hatası:", err)
 	}
 	// E-posta ayarları
 	from := config.GetConfig().From
@@ -41,10 +41,10 @@ func SendOtpHandlerTr(w http.ResponseWriter, r *http.Request) {
 
 	err = e.Send(serverAndPort, smtp.PlainAuth("", from, password, smtpServer))
 	if err != nil {
-		fmt.Println("E-posta gönderme hatası:", err)
+		log.Println("E-posta gönderme hatası:", err)
 		w.WriteHeader(http.StatusInternalServerError)
 	} else {
-		fmt.Println("E-posta başarıyla gönderildi.")
+		log.Println("E-posta başarıyla gönderildi.")
 		w.WriteHeader(http.StatusOK)
 		otpJson := &model.Otp{Otp: otp}
 		json.NewEncoder(w).Encode(otpJson)
@@ -54,10 +54,12 @@ func SendOtpHandlerTr(w http.ResponseWriter, r *http.Request) {
 func SendOtpHandlerEn(w http.ResponseWriter, r *http.Request) {
 	// Decode the request body to get the user's email
 	user := &model.User{}
-	fmt.Print(r.Body)
+	log.Println("Request Mail", r.Body)
 	err := json.NewDecoder(r.Body).Decode(&user)
 	if err != nil {
-		fmt.Println("Decoder error:", err)
+		log.Println("Decoder error:", err)
+	} else {
+		log.Println("Decoder success:", user.Email)
 	}
 
 	// Email settings
@@ -81,10 +83,10 @@ func SendOtpHandlerEn(w http.ResponseWriter, r *http.Request) {
 	// Send the email and handle errors
 	err = e.Send(serverAndPort, smtp.PlainAuth("", from, password, smtpServer))
 	if err != nil {
-		fmt.Println("Email sending error:", err)
+		log.Println("Email sending error:", err)
 		w.WriteHeader(http.StatusInternalServerError)
 	} else {
-		fmt.Println("Email sent successfully.")
+		log.Println("Email sent successfully.")
 		w.WriteHeader(http.StatusOK)
 
 		// Respond with the OTP in JSON format
