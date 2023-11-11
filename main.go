@@ -26,11 +26,11 @@ func main() {
 
 	router.SendOtp(r)
 
-	err = http.ListenAndServe(":9990", r)
+	err = http.ListenAndServe(":8080", r)
 	if err != nil {
 		log.Println("ListenAndServe: ", err)
 		panic(err)
 	} else {
-		log.Println("Server is running on port 9990")
+		log.Println("Server is running on port 8080")
 	}
 }
