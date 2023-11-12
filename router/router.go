@@ -3,10 +3,10 @@ package router
 import (
 	"otpapi/controller"
 
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 )
 
-func SendOtp(r *mux.Router) {
-	r.HandleFunc("/send-otp-tr", controller.SendOtpHandlerTr).Methods("POST")
-	r.HandleFunc("/send-otp-en", controller.SendOtpHandlerEn).Methods("POST")
+func SendOtp(e *gin.Engine) {
+	e.GET("/send-otp-tr", controller.SendOtpHandlerTr)
+	e.GET("/send-otp-en", controller.SendOtpHandlerEn)
 }

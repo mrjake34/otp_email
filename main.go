@@ -2,11 +2,10 @@ package main
 
 import (
 	"log"
-	"net/http"
 	"os"
 	"otpapi/router"
 
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 )
 
 // GetConfig is used to get all configuration data.
@@ -21,16 +20,11 @@ func main() {
 
 	log.SetOutput(logFile)
 
-	// E-posta ayarları
-	r := mux.NewRouter()
+	r := gin.Default()
 
 	router.SendOtp(r)
 
-	err = http.ListenAndServe(":8080", r)
-	if err != nil {
-		log.Println("ListenAndServe: ", err)
-		panic(err)
-	} else {
-		log.Println("Server is running on port 8080")
+	if err := r.Run(":8080"); err != nil {
+		log.Fatal(err)
 	}
 }
