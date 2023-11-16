@@ -1,26 +1,27 @@
 package config
 
 import (
-	"os"
+	"log"
 	"otpapi/model"
 
-	"github.com/joho/godotenv"
+	"github.com/spf13/viper"
 )
 
 func GetConfig() *model.Config {
 	// Create config struct
 	config := &model.Config{}
-
-	err := godotenv.Load("config/config.env")
-	if err != nil {
+	viper.SetConfigFile("config/config.yaml")
+	if err := viper.ReadInConfig(); err != nil {
+		log.Fatal("Error loading .yaml file")
 		panic(err)
 	}
 
 	// Set configuration data
-	config.Host = os.Getenv("HOST")
-	config.Port = os.Getenv("PORT")
-	config.From = os.Getenv("FROM")
-	config.Password = os.Getenv("PASSWORD")
+	config.Host = viper.GetString("email.host")
+	config.Port = viper.GetString("email.port")
+	config.From = viper.GetString("email.from")
+	config.Password = viper.GetString("email.password")
+	config.Key = viper.GetString("security.key")
 
 	// Return config struct
 	return config
