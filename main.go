@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+
 	"otpapi/router"
 
 	"github.com/gin-gonic/gin"

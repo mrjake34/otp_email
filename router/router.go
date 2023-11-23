@@ -1,9 +1,8 @@
 package router
 
 import (
-	"otpapi/controller"
-
 	"github.com/gin-gonic/gin"
+	"otpapi/controller"
 )
 
 func SendOtp(e *gin.Engine) {
