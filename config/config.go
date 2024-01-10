@@ -2,7 +2,6 @@ package config
 
 import (
 	"log"
-
 	"otpapi/model"
 
 	"github.com/spf13/viper"
@@ -11,7 +10,7 @@ import (
 func GetConfig() *model.Config {
 	// Create config struct
 	config := &model.Config{}
-	viper.SetConfigFile("../config/config.yaml")
+	viper.SetConfigFile("/config/config.yaml")
 	if err := viper.ReadInConfig(); err != nil {
 		log.Fatal("Error loading .yaml file")
 		panic(err)

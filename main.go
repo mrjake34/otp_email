@@ -1,15 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
-
 	"otpapi/router"
 
 	"github.com/gin-gonic/gin"
 )
-
-// GetConfig is used to get all configuration data.
 
 func main() {
 
@@ -20,12 +18,15 @@ func main() {
 	defer logFile.Close()
 
 	log.SetOutput(logFile)
-
+	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 
 	router.SendOtp(r)
 
 	if err := r.Run(":8080"); err != nil {
+
+		fmt.Println("Server is running on port 8080")
 		log.Fatal(err)
 	}
+
 }
